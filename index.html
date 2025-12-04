@@ -1,1 +1,128 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SCHIPPERHEIN DRINKT HEINEKEN!!!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg1:#ffecd2;
+      --bg2:#fcb69f;
+      --accent:#2b6cb0;
+      --glass: rgba(255,255,255,0.6);
+    }
+    html,body{height:100%;margin:0;font-family:'Rubik',system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial}
+    body{
+      background: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.6), transparent 10%),
+                  linear-gradient(135deg,var(--bg1),var(--bg2));
+      overflow:hidden;
+      display:flex;align-items:center;justify-content:center;padding:2rem;
+    }
+    .card{
+      position:relative;
+      width:min(1100px,95%);
+      height:min(700px,75vh);
+      border-radius:28px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.85), rgba(255,255,255,0.6));
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+      overflow:hidden;
+      display:grid;place-items:center;
+      padding:3rem;
+      text-align:center;
+      backdrop-filter: blur(6px) saturate(120%);
+    }
+    h1{
+      margin:0 0 1rem 0;
+      font-size:clamp(28px,6vw,68px);
+      line-height:0.95;
+      letter-spacing:1px;
+      color:var(--accent);
+      text-transform:uppercase;
+      text-shadow: 0 6px 18px rgba(43,108,176,0.12), 0 1px 0 rgba(255,255,255,0.6) inset;
+      font-weight:900;
+    }
+    p.lead{
+      margin:0;font-size:clamp(14px,2.2vw,20px);color:#333;opacity:0.85;font-weight:700
+    }
+
+    /* Poep-emojis als decoratie */
+    .poop {
+      position:absolute;
+      will-change:transform,opacity;
+      user-select:none;
+      pointer-events:none;
+      transform-origin:center;
+      font-size:28px;
+      filter: drop-shadow(0 6px 6px rgba(0,0,0,0.12));
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float{
+      0%{transform:translateY(0) rotate(0);} 
+      50%{transform:translateY(-24px) rotate(12deg);} 
+      100%{transform:translateY(0) rotate(0);} 
+    }
+
+    /* subtle footer */
+    .footer{
+      position:absolute;left:18px;bottom:12px;font-size:12px;color:#666;
+      background:var(--glass);padding:6px 10px;border-radius:10px
+    }
+
+    /* responsive */
+    @media (max-width:600px){
+      .card{padding:1.5rem}
+      .footer{left:10px;bottom:10px}
+    }
+
+    /* big banner behind text made of repeating poop pattern */
+    .banner{
+      position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:0;
+      opacity:0.06;font-size:96px;transform:scale(1.1);
+      pointer-events:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="main" aria-label="Schipperhein banner">
+    <div class="banner" aria-hidden="true">💩 💩 💩 💩 💩 💩 💩 💩 💩 💩</div>
+
+    <div style="position:relative;z-index:1;max-width:1000px;">
+      <h1>SCHIPPERHEIN DRINKT HEINEKEN!!!</h1>
+      <p class="lead">Een vrolijke en opvallende pagina — poep overal, precies zoals gevraagd.</p>
+    </div>
+
+    <div class="footer">Gemaakt met liefde (en een beetje gekkigheid)</div>
+  </div>
+
+  <script>
+    // genereer veel poep-elementen willekeurig rond de pagina
+    const count = 60;
+    const bodyRect = document.body.getBoundingClientRect();
+    for(let i=0;i<count;i++){
+      const span = document.createElement('span');
+      span.className='poop';
+      span.textContent = '💩';
+      // random size and position
+      const size = Math.random()*48 + 12; // 12-60px
+      span.style.fontSize = size + 'px';
+      span.style.left = Math.random()*110 + '%';
+      span.style.top = Math.random()*110 + '%';
+      span.style.opacity = (Math.random()*0.6+0.25).toFixed(2);
+      span.style.transform = `translate(-50%,-50%) rotate(${Math.random()*360}deg)`;
+      // slight variation in animation duration/delay
+      const dur = (Math.random()*6 + 4).toFixed(2) + 's';
+      const delay = (Math.random()*-6).toFixed(2) + 's';
+      span.style.animationDuration = dur;
+      span.style.animationDelay = delay;
+      document.body.appendChild(span);
+    }
+
+    // make banner repeat pattern
+    const banner = document.querySelector('.banner');
+    const repeats = Math.ceil(window.innerWidth / 120) * 2;
+    banner.textContent = '💩 '.repeat(repeats);
+  </script>
+</body>
+</html>
 
