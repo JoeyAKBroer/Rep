@@ -3,149 +3,164 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Schipperhein.NL</title>
+  <title>Schipperhein Shop</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
   <style>
     :root{
-      --jumbo-yellow:#ffd400;
-      --jumbo-dark:#1a1a1a;
-      --white:#ffffff;
+      --primary:#ffcd00;
+      --dark:#1a1a1a;
+      --light:#ffffff;
     }
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Rubik',sans-serif}
-    body{
-      background:var(--white);
-      padding:0;margin:0;
-      display:flex;flex-direction:column;min-height:100vh;
-    }
+    body{background:#f5f5f5;min-height:100vh;display:flex;flex-direction:column}
 
     /* HEADER */
     header{
-      width:100%;background:var(--jumbo-yellow);
+      width:100%;background:var(--primary);
       padding:1.2rem 2rem;
       display:flex;align-items:center;justify-content:space-between;
       box-shadow:0 3px 10px rgba(0,0,0,0.1);
     }
-    header .logo{
-      font-size:2.3rem;font-weight:900;letter-spacing:1px;color:var(--jumbo-dark);
-    }
-    header nav a{
-      margin-left:1.4rem;
-      font-weight:700;
-      text-decoration:none;
-      color:var(--jumbo-dark);
+    .logo{font-size:2rem;font-weight:900;color:var(--dark)}
+    nav a{margin-left:1.4rem;font-weight:700;text-decoration:none;color:var(--dark)}
+
+    /* CART ICON */
+    .cart-btn{
+      background:var(--dark);color:white;padding:0.6rem 1.2rem;border-radius:10px;
+      cursor:pointer;font-weight:700;
     }
 
     /* HERO */
     .hero{
-      width:100%;flex:1;
+      width:100%;height:55vh;
       display:flex;align-items:center;justify-content:center;
-      background:url('https://images.unsplash.com/photo-1589451379414-cae9f1bdb072?auto=format&fit=crop&w=1400&q=60') center/cover;
+      background:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=60') center/cover;
       position:relative;
     }
-    .hero::after{
-      content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45);
-    }
-    .hero-content{
-      position:relative;z-index:10;
-      text-align:center;color:white;
-      padding:2rem;
-    }
-    .hero-content h1{
-      font-size:clamp(32px,5vw,72px);
-      font-weight:900;text-transform:uppercase;
-      margin-bottom:1rem;text-shadow:0 6px 20px rgba(0,0,0,0.4);
-    }
-    .hero-content p{
-      font-size:clamp(16px,2vw,24px);
-      font-weight:300;opacity:0.9;
-      margin-bottom:2rem;
-    }
-    .hero-content .cta{
-      display:inline-block;
-      padding:1rem 2rem;
-      background:var(--jumbo-yellow);
-      color:var(--jumbo-dark);
-      border-radius:12px;
-      font-weight:900;text-decoration:none;font-size:1.2rem;
-      box-shadow:0 4px 12px rgba(0,0,0,0.25);
-      transition:0.2s ease;
-    }
-    .hero-content .cta:hover{
-      transform:translateY(-4px);
-      box-shadow:0 8px 18px rgba(0,0,0,0.35);
-    }
+    .hero::after{content:'';position:absolute;inset:0;background:rgba(0,0,0,0.45)}
+    .hero-content{position:relative;color:white;text-align:center;z-index:2;padding:2rem}
+    .hero-content h1{font-size:clamp(36px,6vw,80px);font-weight:900;margin-bottom:1rem}
+    .hero-content p{opacity:0.9;font-size:1.2rem;margin-bottom:1.5rem}
 
-    /* PRODUCT SECTION */
+    /* PRODUCTS */
     .products{
       padding:3rem 2rem;
-      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:2rem;
-      background:#fafafa;
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;
     }
     .product{
-      background:white;border-radius:20px;
-      box-shadow:0 4px 12px rgba(0,0,0,0.08);
-      padding:2rem;text-align:center;
-      transition:0.25s ease;
+      background:white;border-radius:20px;padding:2rem;text-align:center;
+      box-shadow:0 4px 12px rgba(0,0,0,0.1);
+      transition:0.2s;
     }
-    .product:hover{transform:translateY(-6px);box-shadow:0 8px 18px rgba(0,0,0,0.15)}
+    .product:hover{transform:translateY(-6px)}
     .product img{width:120px;margin-bottom:1rem}
-    .product h3{font-size:1.4rem;margin-bottom:0.8rem;font-weight:700;color:var(--jumbo-dark)}
-    .product p{opacity:0.75;margin-bottom:1rem}
-    .product .price{font-size:1.6rem;font-weight:900;color:var(--jumbo-dark)}
+    .product h3{font-size:1.4rem;margin-bottom:0.5rem}
+    .price{font-size:1.5rem;font-weight:900;margin-bottom:1rem}
+    .add-btn{background:var(--primary);padding:0.7rem 1.3rem;border:none;border-radius:14px;font-weight:700;color:var(--dark);cursor:pointer}
 
-    /* FOOTER */
-    footer{
-      background:var(--jumbo-dark);
-      padding:1.5rem;text-align:center;color:white;font-size:0.9rem;margin-top:auto;
+    /* CART PANEL */
+    #cart-panel{
+      position:fixed;right:-400px;top:0;width:350px;height:100%;background:white;
+      box-shadow:-4px 0 10px rgba(0,0,0,0.2);padding:1.5rem;transition:0.35s;
+      display:flex;flex-direction:column;z-index:20;
     }
+    #cart-panel.open{right:0}
+    #cart-items{flex:1;overflow-y:auto;margin-top:1rem}
+    .cart-item{display:flex;justify-content:space-between;margin-bottom:0.8rem;border-bottom:1px solid #ccc;padding-bottom:0.5rem}
+    #total{font-weight:900;font-size:1.3rem;margin-top:1rem}
+    #close-cart{background:var(--dark);color:white;padding:0.6rem;border-radius:10px;cursor:pointer;width:100%;margin-top:1rem;text-align:center}
+
+    footer{background:var(--dark);color:white;text-align:center;padding:1.2rem;margin-top:auto}
   </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Schipperhein</div>
+  <div class="logo">Schipperhein Shop</div>
   <nav>
     <a href="#">Home</a>
-    <a href="#">Aanbiedingen</a>
-    <a href="#">Contact</a>
+    <a href="#">Producten</a>
+    <a href="#">Over ons</a>
   </nav>
+  <div class="cart-btn" onclick="toggleCart()">🛒 Winkelmand</div>
 </header>
 
 <section class="hero">
   <div class="hero-content">
     <h1>SCHIPPERHEIN VERKOOPT HEINEKEN!!!</h1>
-    <p>Nu bij onze speciale actiehoek – Schipperhein brengt de beste Heineken-deals!</p>
-    <a class="cta" href="#producten">Bekijk Actie</a>
+    <p>De beste deals, rechtstreeks van Schipperhein.</p>
   </div>
 </section>
 
-<section id="producten" class="products">
+<section class="products" id="products">
+
   <div class="product">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Heineken_Bottle.png/640px-Heineken_Bottle.png" alt="Heineken Fles">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Heineken_Bottle.png/640px-Heineken_Bottle.png">
     <h3>Heineken Fles</h3>
-    <p>Altijd koud, altijd lekker. Schipperhein approved.</p>
-    <div class="price">€1,49</div>
+    <div class="price" data-price="1.49">€1,49</div>
+    <button class="add-btn" onclick="addToCart('Heineken Fles', 1.49)">Voeg toe</button>
   </div>
 
   <div class="product">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Heineken-Can.png/640px-Heineken-Can.png" alt="Heineken Blik">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Heineken-Can.png/640px-Heineken-Can.png">
     <h3>Heineken Blik</h3>
-    <p>Perfect voor de vrijdagavond.</p>
-    <div class="price">€1,19</div>
+    <div class="price" data-price="1.19">€1,19</div>
+    <button class="add-btn" onclick="addToCart('Heineken Blik', 1.19)">Voeg toe</button>
   </div>
 
   <div class="product">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Heineken_Barrel.png/640px-Heineken_Barrel.png" alt="Heineken Vat">
-    <h3>Heineken Party Vat</h3>
-    <p>Voor wanneer Schipperhein écht dorst heeft.</p>
-    <div class="price">€17,99</div>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Heineken_Barrel.png/640px-Heineken_Barrel.png">
+    <h3>Heineken Vat</h3>
+    <div class="price" data-price="17.99">€17,99</div>
+    <button class="add-btn" onclick="addToCart('Heineken Vat', 17.99)">Voeg toe</button>
   </div>
+
 </section>
+
+<!-- CART PANEL -->
+<div id="cart-panel">
+  <h2>🛒 Winkelmand</h2>
+  <div id="cart-items"></div>
+  <div id="total">Totaal: €0,00</div>
+  <div id="close-cart" onclick="toggleCart()">Sluiten</div>
+</div>
 
 <footer>
-  Gemaakt in de stijl van schipperhein — met een vleugje Schipperhein
+  Schipperhein Shop — Alles voor jouw dorst.
 </footer>
+
+<script>
+  let cart = [];
+
+  function toggleCart(){
+    document.getElementById('cart-panel').classList.toggle('open');
+  }
+
+  function addToCart(name, price){
+    cart.push({name, price});
+    renderCart();
+  }
+
+  function renderCart(){
+    const container = document.getElementById('cart-items');
+    container.innerHTML = '';
+
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price;
+      const div = document.createElement('div');
+      div.className = 'cart-item';
+      div.innerHTML = `
+        <span>${item.name}</span>
+        <span>€${item.price.toFixed(2)}</span>
+      `;
+      container.appendChild(div);
+    });
+
+    document.getElementById('total').innerText = `Totaal: €${total.toFixed(2)}`;
+  }
+</script>
 
 </body>
 </html>
