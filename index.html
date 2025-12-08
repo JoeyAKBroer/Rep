@@ -14,7 +14,6 @@
     *{box-sizing:border-box;margin:0;padding:0;font-family:'Rubik',sans-serif}
     body{background:#f5f5f5;min-height:100vh;display:flex;flex-direction:column}
 
-    /* HEADER */
     header{
       width:100%;background:var(--primary);
       padding:1.2rem 2rem;
@@ -24,13 +23,11 @@
     .logo{font-size:2rem;font-weight:900;color:var(--dark)}
     nav a{margin-left:1.4rem;font-weight:700;text-decoration:none;color:var(--dark)}
 
-    /* CART ICON */
     .cart-btn{
       background:var(--dark);color:white;padding:0.6rem 1.2rem;border-radius:10px;
       cursor:pointer;font-weight:700;
     }
 
-    /* HERO */
     .hero{
       width:100%;height:55vh;
       display:flex;align-items:center;justify-content:center;
@@ -42,7 +39,6 @@
     .hero-content h1{font-size:clamp(36px,6vw,80px);font-weight:900;margin-bottom:1rem}
     .hero-content p{opacity:0.9;font-size:1.2rem;margin-bottom:1.5rem}
 
-    /* PRODUCTS */
     .products{
       padding:3rem 2rem;
       display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;
@@ -50,15 +46,17 @@
     .product{
       background:white;border-radius:20px;padding:2rem;text-align:center;
       box-shadow:0 4px 12px rgba(0,0,0,0.1);
-      transition:0.2s;
+      transition:0.2s;cursor:pointer;
     }
     .product:hover{transform:translateY(-6px)}
     .product img{width:120px;margin-bottom:1rem}
     .product h3{font-size:1.4rem;margin-bottom:0.5rem}
     .price{font-size:1.5rem;font-weight:900;margin-bottom:1rem}
-    .add-btn{background:var(--primary);padding:0.7rem 1.3rem;border:none;border-radius:14px;font-weight:700;color:var(--dark);cursor:pointer}
+    .add-btn{
+      background:var(--primary);padding:0.7rem 1.3rem;border:none;
+      border-radius:14px;font-weight:700;color:var(--dark);cursor:pointer
+    }
 
-    /* CART PANEL */
     #cart-panel{
       position:fixed;right:-400px;top:0;width:350px;height:100%;background:white;
       box-shadow:-4px 0 10px rgba(0,0,0,0.2);padding:1.5rem;transition:0.35s;
@@ -71,6 +69,18 @@
     #close-cart{background:var(--dark);color:white;padding:0.6rem;border-radius:10px;cursor:pointer;width:100%;margin-top:1rem;text-align:center}
 
     footer{background:var(--dark);color:white;text-align:center;padding:1.2rem;margin-top:auto}
+
+    /* MODAL */
+    .modal{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:rgba(0,0,0,0.6);align-items:center;justify-content:center;z-index:100;
+    }
+    .modal-content{
+      background:white;padding:2rem;border-radius:20px;width:90%;max-width:450px;text-align:center;
+      box-shadow:0 6px 20px rgba(0,0,0,0.3);position:relative;
+    }
+    .modal-content img{width:160px;margin-bottom:1rem}
+    .close{font-size:2rem;cursor:pointer;position:absolute;top:10px;right:20px;color:#000}
   </style>
 </head>
 <body>
@@ -94,57 +104,43 @@
 
 <section class="products" id="products">
 
-  <!-- products clickable --> onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
+  <!-- PRODUCTEN MET DATASET -->
+  <div class="product"
+       data-name="Heineken Fles"
+       data-price="1.49"
+       data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Heineken_Bottle.png/640px-Heineken_Bottle.png"
+       data-desc="Een klassieke Heineken fles, koud en klaar.">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Heineken_Bottle.png/640px-Heineken_Bottle.png">
     <h3>Heineken Fles</h3>
-    <div class="price" data-price="1.49">€1,49</div>
-    <button class="add-btn" onclick="addToCart('Heineken Fles', 1.49)">Voeg toe</button>
+    <div class="price">€1,49</div>
+    <button class="add-btn" onclick="event.stopPropagation(); addToCart('Heineken Fles', 1.49)">Voeg toe</button>
   </div>
 
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
+  <div class="product"
+       data-name="Heineken Blik"
+       data-price="1.19"
+       data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Heineken-Can.png/640px-Heineken-Can.png"
+       data-desc="Een fris blikje Heineken.">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Heineken-Can.png/640px-Heineken-Can.png">
     <h3>Heineken Blik</h3>
-    <div class="price" data-price="1.19">€1,19</div>
-    <button class="add-btn" onclick="addToCart('Heineken Blik', 1.19)">Voeg toe</button>
+    <div class="price">€1,19</div>
+    <button class="add-btn" onclick="event.stopPropagation(); addToCart('Heineken Blik', 1.19)">Voeg toe</button>
   </div>
 
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
+  <div class="product"
+       data-name="Heineken Vat"
+       data-price="17.99"
+       data-img="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Heineken_Barrel.png/640px-Heineken_Barrel.png"
+       data-desc="Een vol vat Heineken voor elk feestje.">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Heineken_Barrel.png/640px-Heineken_Barrel.png">
     <h3>Heineken Vat</h3>
-    <div class="price" data-price="17.99">€17,99</div>
-    <button class="add-btn" onclick="addToCart('Heineken Vat', 17.99)">Voeg toe</button>
+    <div class="price">€17,99</div>
+    <button class="add-btn" onclick="event.stopPropagation(); addToCart('Heineken Vat', 17.99)">Voeg toe</button>
   </div>
 
-  <!-- EXTRA PRODUCTEN -->
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Heineken_Silver.png/640px-Heineken_Silver.png">
-    <h3>Heineken Silver</h3>
-    <div class="price" data-price="1.69">€1,69</div>
-    <button class="add-btn" onclick="addToCart('Heineken Silver', 1.69)">Voeg toe</button>
-  </div>
-
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Heineken_0.0.png/640px-Heineken_0.0.png">
-    <h3>Heineken 0.0</h3>
-    <div class="price" data-price="1.29">€1,29</div>
-    <button class="add-btn" onclick="addToCart('Heineken 0.0', 1.29)">Voeg toe</button>
-  </div>
-
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Heineken_keg.png/640px-Heineken_keg.png">
-    <h3>Heineken Mega Vat 50L</h3>
-    <div class="price" data-price="149.99">€149,99</div>
-    <button class="add-btn" onclick="addToCart('Heineken Mega Vat 50L', 149.99)">Voeg toe</button>
-  </div>
-
-  <div class="product" onclick="openModal(this.dataset.name, parseFloat(this.dataset.price), this.dataset.img, this.dataset.desc)">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Heineken_Giftpack.png/640px-Heineken_Giftpack.png">
-    <h3>Heineken Cadeau Pack</h3>
-    <div class="price" data-price="12.99">€12,99</div>
-    <button class="add-btn" onclick="addToCart('Heineken Cadeau Pack', 12.99)">Voeg toe</button>
-  </div>
 </section>
-<!-- CART PANEL -->
+
+<!-- WINKELMAND -->
 <div id="cart-panel">
   <h2>🛒 Winkelmand</h2>
   <div id="cart-items"></div>
@@ -155,6 +151,18 @@
 <footer>
   Schipperhein Shop — Alles voor jouw dorst.
 </footer>
+
+<!-- MODAL -->
+<div id="product-modal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">×</span>
+    <h2 id="modal-title">Product naam</h2>
+    <img id="modal-img" src="" alt="product" />
+    <p id="modal-desc">Beschrijving...</p>
+    <div id="modal-price">Prijs:</div>
+    <button id="modal-add-btn" class="add-btn">Voeg toe</button>
+  </div>
+</div>
 
 <script>
   let cart = [];
@@ -171,62 +179,38 @@
   function renderCart(){
     const container = document.getElementById('cart-items');
     container.innerHTML = '';
-
     let total = 0;
 
-    cart.forEach((item, index) => {
+    cart.forEach(item => {
       total += item.price;
       const div = document.createElement('div');
       div.className = 'cart-item';
-      div.innerHTML = `
-        <span>${item.name}</span>
-        <span>€${item.price.toFixed(2)}</span>
-      `;
+      div.innerHTML = `<span>${item.name}</span><span>€${item.price.toFixed(2)}</span>`;
       container.appendChild(div);
     });
 
     document.getElementById('total').innerText = `Totaal: €${total.toFixed(2)}`;
   }
-</script>
 
-  
-<!-- PRODUCT MODAL -->
-<div id="product-modal" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="closeModal()">×</span>
-    <h2 id="modal-title">Product naam</h2>
-    <img id="modal-img" src="" alt="product" />
-    <p id="modal-desc">Beschrijving...</p>
-    <div id="modal-price">Prijs:</div>
-    <button id="modal-add-btn" class="add-btn">Voeg toe</button>
-  </div>
-</div>
+  // MODAL
+  document.querySelectorAll('.product').forEach(product => {
+    product.addEventListener('click', () => {
 
-<style>
-  .modal{
-    display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.6);
-    align-items:center;justify-content:center;z-index:100;
-  }
-  .modal-content{
-    background:white;padding:2rem;border-radius:20px;width:90%;max-width:450px;text-align:center;
-    box-shadow:0 6px 20px rgba(0,0,0,0.3);
-  }
-  .modal-content img{width:160px;margin-bottom:1rem}
-  .close{font-size:2rem;cursor:pointer;position:absolute;top:20px;right:30px;color:white}
-</style>
+      const name = product.dataset.name;
+      const price = parseFloat(product.dataset.price);
+      const img = product.dataset.img;
+      const desc = product.dataset.desc;
 
-<script>
-  function openModal(name, price, img, desc){
-    document.getElementById('modal-title').innerText = name;
-    document.getElementById('modal-img').src = img;
-    document.getElementById('modal-desc').innerText = desc;
-    document.getElementById('modal-price').innerText = `Prijs: €${price.toFixed(2)}`;
+      document.getElementById('modal-title').innerText = name;
+      document.getElementById('modal-img').src = img;
+      document.getElementById('modal-desc').innerText = desc;
+      document.getElementById('modal-price').innerText = "Prijs: €" + price.toFixed(2);
 
-    const addBtn = document.getElementById('modal-add-btn');
-    addBtn.onclick = () => addToCart(name, price);
+      document.getElementById('modal-add-btn').onclick = () => addToCart(name, price);
 
-    document.getElementById('product-modal').style.display = 'flex';
-  }
+      document.getElementById('product-modal').style.display = 'flex';
+    });
+  });
 
   function closeModal(){
     document.getElementById('product-modal').style.display = 'none';
