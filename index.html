@@ -1,16 +1,19 @@
 <!doctype html>
 <html lang="nl">
 <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>Schipperhein Shop</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
+
 :root{
 --primary:#ffcd00;
---dark:#1a1a1a;
+--dark:#111;
 --light:#ffffff;
 }
 
@@ -22,51 +25,51 @@ font-family:'Rubik',sans-serif;
 }
 
 body{
-background:#f5f5f5;
+background:#f2f2f2;
 min-height:100vh;
 display:flex;
 flex-direction:column;
 }
 
+/* HEADER */
+
 header{
-width:100%;
 background:var(--primary);
-padding:1.2rem 2rem;
+padding:1.3rem 2rem;
 display:flex;
-align-items:center;
 justify-content:space-between;
-box-shadow:0 3px 10px rgba(0,0,0,0.1);
+align-items:center;
+box-shadow:0 4px 12px rgba(0,0,0,0.15);
 }
 
 .logo{
 font-size:2rem;
 font-weight:900;
-color:var(--dark);
 }
 
 nav a{
-margin-left:1.4rem;
-font-weight:700;
+margin-left:1.5rem;
 text-decoration:none;
-color:var(--dark);
+font-weight:700;
+color:black;
 }
 
 .cart-btn{
-background:var(--dark);
+background:black;
 color:white;
-padding:0.6rem 1.2rem;
-border-radius:10px;
+padding:8px 15px;
+border-radius:12px;
 cursor:pointer;
-font-weight:700;
 }
 
+/* HERO */
+
 .hero{
-width:100%;
 height:55vh;
+background:url("Images/hero.jpg") center/cover;
 display:flex;
 align-items:center;
 justify-content:center;
-background:url('Images/hero.jpg') center/cover;
 position:relative;
 }
 
@@ -74,89 +77,86 @@ position:relative;
 content:'';
 position:absolute;
 inset:0;
-background:rgba(0,0,0,0.45);
+background:rgba(0,0,0,0.55);
 }
 
 .hero-content{
 position:relative;
 color:white;
 text-align:center;
-z-index:2;
-padding:2rem;
+animation:fadeIn 1.5s;
 }
 
-.hero-content h1{
-font-size:clamp(36px,6vw,80px);
-font-weight:900;
-margin-bottom:1rem;
+.hero h1{
+font-size:clamp(40px,6vw,90px);
 }
 
-.hero-content p{
-opacity:0.9;
-font-size:1.2rem;
-margin-bottom:1.5rem;
+.hero p{
+margin-top:10px;
+font-size:20px;
 }
+
+/* PRODUCTS */
 
 .products{
-padding:3rem 2rem;
+padding:3rem;
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
 gap:2rem;
 }
 
 .product{
 background:white;
-border-radius:20px;
 padding:2rem;
+border-radius:18px;
 text-align:center;
-box-shadow:0 4px 12px rgba(0,0,0,0.1);
-transition:0.2s;
-cursor:pointer;
+box-shadow:0 10px 20px rgba(0,0,0,0.1);
+transition:0.3s;
+opacity:0;
+transform:translateY(30px);
+animation:fadeUp 0.6s forwards;
 }
 
 .product:hover{
-transform:translateY(-6px);
+transform:translateY(-10px) scale(1.03);
+box-shadow:0 15px 30px rgba(0,0,0,0.15);
 }
 
 .product img{
 width:120px;
-margin-bottom:1rem;
-}
-
-.product h3{
-font-size:1.4rem;
-margin-bottom:0.5rem;
+margin-bottom:10px;
 }
 
 .price{
-font-size:1.5rem;
+font-size:1.4rem;
 font-weight:900;
-margin-bottom:1rem;
+margin:10px 0;
 }
 
 .add-btn{
 background:var(--primary);
-padding:0.7rem 1.3rem;
 border:none;
-border-radius:14px;
+padding:10px 16px;
+border-radius:12px;
 font-weight:700;
-color:var(--dark);
 cursor:pointer;
 }
 
+/* CART */
+
 #cart-panel{
 position:fixed;
-right:-400px;
 top:0;
-width:350px;
+right:-400px;
+width:340px;
 height:100%;
 background:white;
-box-shadow:-4px 0 10px rgba(0,0,0,0.2);
-padding:1.5rem;
-transition:0.35s;
+padding:2rem;
+box-shadow:-5px 0 20px rgba(0,0,0,0.2);
+transition:0.4s;
 display:flex;
 flex-direction:column;
-z-index:20;
+z-index:50;
 }
 
 #cart-panel.open{
@@ -165,51 +165,40 @@ right:0;
 
 #cart-items{
 flex:1;
-overflow-y:auto;
 margin-top:1rem;
+overflow:auto;
 }
 
 .cart-item{
 display:flex;
 justify-content:space-between;
-margin-bottom:0.8rem;
-border-bottom:1px solid #ccc;
-padding-bottom:0.5rem;
+border-bottom:1px solid #ddd;
+padding:6px 0;
 }
 
 #total{
 font-weight:900;
 font-size:1.3rem;
-margin-top:1rem;
+margin-top:10px;
 }
 
 #close-cart{
-background:var(--dark);
+background:black;
 color:white;
-padding:0.6rem;
+padding:10px;
 border-radius:10px;
-cursor:pointer;
-width:100%;
-margin-top:1rem;
+margin-top:10px;
 text-align:center;
+cursor:pointer;
 }
 
-footer{
-background:var(--dark);
-color:white;
-text-align:center;
-padding:1.2rem;
-margin-top:auto;
-}
+/* MODAL */
 
 .modal{
 display:none;
 position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
+inset:0;
+background:rgba(0,0,0,0.7);
 align-items:center;
 justify-content:center;
 z-index:100;
@@ -219,182 +208,218 @@ z-index:100;
 background:white;
 padding:2rem;
 border-radius:20px;
-width:90%;
-max-width:450px;
 text-align:center;
-box-shadow:0 6px 20px rgba(0,0,0,0.3);
-position:relative;
+max-width:420px;
+animation:pop 0.3s;
 }
 
-.modal-content img{
+.modal img{
 width:160px;
-margin-bottom:1rem;
+margin-bottom:10px;
 }
 
 .close{
 font-size:2rem;
 cursor:pointer;
 position:absolute;
-top:10px;
 right:20px;
+top:10px;
 }
+
+/* FOOTER */
+
+footer{
+background:black;
+color:white;
+text-align:center;
+padding:1rem;
+margin-top:auto;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp{
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
+
+@keyframes pop{
+from{transform:scale(.7)}
+to{transform:scale(1)}
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
+
 <div class="logo">Schipperhein Shop</div>
 
 <nav>
 <a href="#">Home</a>
 <a href="#">Producten</a>
-<a href="#">Over ons</a>
+<a href="#">Contact</a>
 </nav>
 
-<div class="cart-btn" onclick="toggleCart()">🛒 Winkelmand</div>
+<div class="cart-btn" onclick="toggleCart()">🛒</div>
+
 </header>
 
 <section class="hero">
 <div class="hero-content">
-<h1>SCHIPPERHEIN VERKOOPT HEINEKEN!!!</h1>
-<p>De beste deals, rechtstreeks van Schipperhein.</p>
+<h1>SCHIPPERHEIN</h1>
+<p>De beste Heineken deals</p>
 </div>
 </section>
 
 <section class="products" id="products"></section>
 
 <div id="cart-panel">
-<h2>🛒 Winkelmand</h2>
+
+<h2>Winkelmand</h2>
+
 <div id="cart-items"></div>
-<div id="total">Totaal: €0,00</div>
+
+<div id="total"></div>
+
 <div id="close-cart" onclick="toggleCart()">Sluiten</div>
+
 </div>
 
 <footer>
-Schipperhein Shop — Alles voor jouw dorst.
+Schipperhein Shop
 </footer>
 
 <div id="product-modal" class="modal">
 <div class="modal-content">
-<span class="close" onclick="closeModal()">×</span>
+
 <h2 id="modal-title"></h2>
+
 <img id="modal-img">
+
 <p id="modal-desc"></p>
+
 <div id="modal-price"></div>
-<button id="modal-add-btn" class="add-btn">Voeg toe</button>
+
+<button id="modal-add" class="add-btn">Voeg toe</button>
+
 </div>
 </div>
 
 <script>
 
-const products = [
+const products=[
 
-{
-name:"Heineken Fles",
-price:1.49,
-img:"Images/heineken-fles.png",
-desc:"Een klassieke Heineken fles, koud en klaar."
-},
+{name:"Heineken Fles",price:1.49,img:"Images/heineken-fles.png",desc:"Klassieke Heineken fles."},
 
-{
-name:"Heineken Blik",
-price:1.19,
-img:"Images/heineken-blik.png",
-desc:"Een fris blikje Heineken."
-},
+{name:"Heineken Blik",price:1.19,img:"Images/heineken-blik.png",desc:"Fris koud blikje."},
 
-{
-name:"Heineken Vat",
-price:17.99,
-img:"Images/heineken-vat.png",
-desc:"Een vol vat Heineken voor elk feestje."
-}
+{name:"Heineken Vat",price:17.99,img:"Images/heineken-vat.png",desc:"Perfect voor feestjes."},
 
-];
+{name:"Heineken Krat",price:14.99,img:"Images/heineken-krat.png",desc:"24 flesjes."},
 
-let cart=[];
+{name:"Heineken 0.0",price:1.29,img:"Images/heineken-0.png",desc:"Alcoholvrij bier."},
 
-const container=document.getElementById("products");
+{name:"Heineken Glas",price:4.99,img:"Images/heineken-glass.png",desc:"Officieel bierglas."}
 
-products.forEach(p=>{
+]
 
-const div=document.createElement("div");
-div.className="product";
+let cart=JSON.parse(localStorage.getItem("cart"))||[]
+
+const container=document.getElementById("products")
+
+products.forEach((p,i)=>{
+
+const div=document.createElement("div")
+
+div.className="product"
+
+div.style.animationDelay=i*0.1+"s"
 
 div.innerHTML=`
+
 <img src="${p.img}">
 <h3>${p.name}</h3>
-<div class="price">€${p.price.toFixed(2)}</div>
+<div class="price">€${p.price}</div>
 <button class="add-btn">Voeg toe</button>
-`;
 
-div.onclick=()=>openModal(p);
+`
 
-div.querySelector("button").onclick=(e)=>{
-e.stopPropagation();
-addToCart(p.name,p.price);
-};
+div.onclick=()=>openModal(p)
 
-container.appendChild(div);
-
-});
-
-function toggleCart(){
-document.getElementById("cart-panel").classList.toggle("open");
+div.querySelector("button").onclick=e=>{
+e.stopPropagation()
+addToCart(p)
 }
 
-function addToCart(name,price){
+container.appendChild(div)
 
-cart.push({name,price});
-renderCart();
+})
+
+function toggleCart(){
+document.getElementById("cart-panel").classList.toggle("open")
+}
+
+function addToCart(p){
+
+cart.push(p)
+
+localStorage.setItem("cart",JSON.stringify(cart))
+
+renderCart()
 
 }
 
 function renderCart(){
 
-const c=document.getElementById("cart-items");
-c.innerHTML="";
+const items=document.getElementById("cart-items")
 
-let total=0;
+items.innerHTML=""
 
-cart.forEach(item=>{
+let total=0
 
-total+=item.price;
+cart.forEach(i=>{
 
-const div=document.createElement("div");
+total+=i.price
 
-div.className="cart-item";
+const div=document.createElement("div")
 
-div.innerHTML=`
-<span>${item.name}</span>
-<span>€${item.price.toFixed(2)}</span>
-`;
+div.className="cart-item"
 
-c.appendChild(div);
+div.innerHTML=`<span>${i.name}</span><span>€${i.price}</span>`
 
-});
+items.appendChild(div)
 
-document.getElementById("total").innerText="Totaal: €"+total.toFixed(2);
+})
+
+document.getElementById("total").innerText="Totaal €"+total.toFixed(2)
 
 }
+
+renderCart()
 
 function openModal(p){
 
-document.getElementById("modal-title").innerText=p.name;
-document.getElementById("modal-img").src=p.img;
-document.getElementById("modal-desc").innerText=p.desc;
-document.getElementById("modal-price").innerText="Prijs: €"+p.price.toFixed(2);
+document.getElementById("product-modal").style.display="flex"
 
-document.getElementById("modal-add-btn").onclick=()=>addToCart(p.name,p.price);
+document.getElementById("modal-title").innerText=p.name
 
-document.getElementById("product-modal").style.display="flex";
+document.getElementById("modal-img").src=p.img
 
-}
+document.getElementById("modal-desc").innerText=p.desc
 
-function closeModal(){
+document.getElementById("modal-price").innerText="€"+p.price
 
-document.getElementById("product-modal").style.display="none";
+document.getElementById("modal-add").onclick=()=>addToCart(p)
 
 }
 
